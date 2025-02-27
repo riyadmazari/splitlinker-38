@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { User, Plus, Users, DollarSign, Send, Link, Euro } from "lucide-react";
+import { User, Plus, Users, DollarSign, Send, Link, Euro, Copy } from "lucide-react";
 import { ContributorCard, Contributor } from "@/components/ui/ContributorCard";
 import { LinkShare } from "@/components/ui/LinkShare";
 import { SlideTransition, StaggerChildren } from "@/components/ui/SlideTransition";
