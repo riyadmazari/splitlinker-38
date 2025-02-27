@@ -17,11 +17,13 @@ import { useToast } from "@/hooks/use-toast";
 interface CollectorFormProps {
   totalAmount: number;
   poolId?: string;
+  subscriptionName?: string;
 }
 
 export const CollectorForm = ({ 
   totalAmount, 
-  poolId = "demo" 
+  poolId = "demo",
+  subscriptionName = "Payment"
 }: CollectorFormProps) => {
   const [contributors, setContributors] = useState<Contributor[]>([]);
   const [remainingAmount, setRemainingAmount] = useState<number>(totalAmount);
@@ -128,6 +130,16 @@ export const CollectorForm = ({
       description: `Saved ${contributors.length} contributors to the pool`,
     });
   };
+
+  // Generate a test contributor link for demonstration
+  const getContributorLinks = () => {
+    const links = contributors.map(contributor => ({
+      name: contributor.name,
+      link: `${window.location.origin}/pay/${poolId}/${contributor.id}`
+    }));
+    
+    return links;
+  };
   
   return (
     <div className="max-w-2xl mx-auto px-4 py-8">
@@ -136,7 +148,7 @@ export const CollectorForm = ({
           <div className="chip mb-2 bg-primary/10 text-primary">
             PAYMENT REQUEST
           </div>
-          <h1 className="text-3xl font-semibold mb-2">Split Payment</h1>
+          <h1 className="text-3xl font-semibold mb-2">Split {subscriptionName}</h1>
           <p className="text-muted-foreground">
             Add contributors and distribute the payment amount
           </p>
@@ -281,14 +293,49 @@ export const CollectorForm = ({
         )}
         
         {contributors.length > 0 && (
-          <ScaleIn>
-            <LinkShare
-              link={window.location.href}
-              title="Payment Collection Link"
-              description="Share this link with others to manage this payment split"
-              className="mb-6"
-            />
-          </ScaleIn>
+          <>
+            <ScaleIn className="mb-6">
+              <LinkShare
+                link={window.location.href}
+                title="Payment Collection Link"
+                description="Share this link with others to manage this payment split"
+              />
+            </ScaleIn>
+            
+            <FadeIn>
+              <div className="glass-card p-5 mb-6">
+                <h3 className="font-medium mb-3">Contributor Payment Links</h3>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Share these links with each contributor to collect their payment
+                </p>
+                
+                <div className="space-y-3">
+                  {getContributorLinks().map((item, index) => (
+                    <div key={index} className="flex items-center justify-between p-3 bg-secondary/30 rounded-lg">
+                      <div className="font-medium">{item.name}</div>
+                      <div className="flex items-center gap-2">
+                        <div className="text-xs truncate max-w-[150px] text-muted-foreground">
+                          {item.link.substring(0, 20)}...
+                        </div>
+                        <button
+                          onClick={() => {
+                            navigator.clipboard.writeText(item.link);
+                            toast({
+                              title: "Link copied",
+                              description: `Link for ${item.name} copied to clipboard`
+                            });
+                          }}
+                          className="p-1.5 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
+                        >
+                          <Copy size={14} />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </FadeIn>
+          </>
         )}
       </SlideTransition>
     </div>
