@@ -3,7 +3,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DollarSign, Euro } from "lucide-react";
 import { generateUniqueId } from "@/utils/generateLinks";
-import { SlideTransition, FadeIn, ScaleIn } from "@/components/ui/animations";
+import { SlideTransition } from "@/components/ui/SlideTransition";  // Fixed import
+import { FadeIn, ScaleIn } from "@/components/ui/animations";
 import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
