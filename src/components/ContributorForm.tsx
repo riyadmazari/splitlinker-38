@@ -1,25 +1,28 @@
 
 import { useState } from "react";
-import { User, CreditCard, Check, ArrowRight, DollarSign, Euro } from "lucide-react";
+import { User, CreditCard, Check, ArrowRight, DollarSign, Euro, ChevronDown } from "lucide-react";
 import { SlideTransition } from "@/components/ui/SlideTransition";
 import { VerificationPayment } from "@/components/ui/VerificationPayment";
 import { FadeIn, ScaleIn, SuccessCheckmark } from "@/components/ui/animations";
-import { ContributorCard } from "@/components/ui/ContributorCard";
+import { ContributorCard, Contributor } from "@/components/ui/ContributorCard";
 import { useToast } from "@/hooks/use-toast";
 
 interface ContributorFormProps {
   contributorId: string;
   poolId: string;
   amount: number;
+  availableContributors?: Contributor[];
 }
 
 export const ContributorForm = ({
   contributorId,
   poolId,
   amount,
+  availableContributors = [],
 }: ContributorFormProps) => {
   const [step, setStep] = useState<"details" | "verification" | "success">("details");
   const [name, setName] = useState<string>("");
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const { toast } = useToast();
   
   const contributor = {
@@ -36,7 +39,7 @@ export const ContributorForm = ({
     if (!name) {
       toast({
         title: "Name required",
-        description: "Please enter your name to continue",
+        description: "Please select your name to continue",
         variant: "destructive",
       });
       return;
@@ -51,6 +54,15 @@ export const ContributorForm = ({
   
   const handleVerificationCancel = () => {
     setStep("details");
+  };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const selectName = (selectedName: string) => {
+    setName(selectedName);
+    setIsDropdownOpen(false);
   };
   
   return (
@@ -91,26 +103,61 @@ export const ContributorForm = ({
           <ScaleIn delay={0.1}>
             <form onSubmit={handleSubmit} className="mb-6">
               <div className="glass-card p-5">
-                <h2 className="text-lg font-medium mb-4">Your Details</h2>
+                <h2 className="text-lg font-medium mb-4">Who Are You?</h2>
                 
                 <div className="mb-4">
                   <label htmlFor="name" className="block text-sm font-medium mb-1">
-                    Your Name
+                    Select Your Name
                   </label>
                   <div className="relative">
                     <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
                       <User size={18} />
                     </div>
-                    <input
-                      id="name"
-                      type="text"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      className="input-field pl-10 w-full"
-                      placeholder="Enter your name"
-                      required
-                    />
+                    
+                    {availableContributors.length > 0 ? (
+                      <div className="relative">
+                        <button
+                          type="button"
+                          className="input-field pl-10 pr-10 w-full text-left flex justify-between items-center"
+                          onClick={toggleDropdown}
+                        >
+                          {name || "Select your name"}
+                          <ChevronDown size={18} className={`transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                        </button>
+                        
+                        {isDropdownOpen && (
+                          <div className="absolute top-full left-0 right-0 mt-1 bg-background border border-input rounded-lg shadow-lg z-10">
+                            {availableContributors.map((contributor) => (
+                              <button
+                                key={contributor.id}
+                                type="button"
+                                className="w-full text-left px-4 py-2 hover:bg-secondary transition-colors"
+                                onClick={() => selectName(contributor.name)}
+                              >
+                                {contributor.name}
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <input
+                        id="name"
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className="input-field pl-10 w-full"
+                        placeholder="Enter your name"
+                        required
+                      />
+                    )}
                   </div>
+                  
+                  {availableContributors.length > 0 && (
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Choose from the names provided by the collector
+                    </p>
+                  )}
                 </div>
                 
                 <button

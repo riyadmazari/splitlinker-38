@@ -85,7 +85,9 @@ export const CollectorForm = ({
     const contributor = contributors.find(c => c.id === id);
     if (!contributor) return;
     
-    // In a real app, would send via email, SMS, etc.
+    // In a real app, we would store contributors in a database
+    // and create payment links for each contributor
+    
     // For demo, just show success toast with copy option
     toast({
       title: `Link sent to ${contributor.name}`,
@@ -97,6 +99,34 @@ export const CollectorForm = ({
     setContributors(prev => 
       prev.map(c => c.id === id ? { ...c, isEditing: !c.isEditing } : c)
     );
+  };
+
+  // In a real app, this function would save the contributors to a database
+  const saveContributors = () => {
+    // For this demo, we'll just show a toast
+    if (contributors.length === 0) {
+      toast({
+        title: "No contributors",
+        description: "Add contributors first to save",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const missingNames = contributors.some(c => !c.name || c.name.trim() === "");
+    if (missingNames) {
+      toast({
+        title: "Missing names",
+        description: "Please provide names for all contributors",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    toast({
+      title: "Contributors saved",
+      description: `Saved ${contributors.length} contributors to the pool`,
+    });
   };
   
   return (
@@ -202,39 +232,52 @@ export const CollectorForm = ({
             </div>
           </FadeIn>
         ) : (
-          <StaggerChildren
-            staggerDelay={0.05}
-            className="mb-6"
-          >
-            {contributors.map((contributor, index) => (
-              <div 
-                key={contributor.id}
-                id={`contributor-${contributor.id}`}
-                className="relative mb-4 group"
-                onClick={() => toggleEditMode(contributor.id)}
-              >
-                <ContributorCard
-                  contributor={contributor}
-                  totalAmount={totalAmount}
-                  onRemove={removeContributor}
-                  onEdit={updateContributorAmount}
-                  onNameChange={updateContributorName}
-                  index={index}
-                />
-                
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    sendContributorLink(contributor.id);
-                  }}
-                  className="opacity-0 group-hover:opacity-100 absolute right-3 top-3 p-2 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all transform scale-90 hover:scale-100"
-                  aria-label="Send payment link"
+          <>
+            <StaggerChildren
+              staggerDelay={0.05}
+              className="mb-6"
+            >
+              {contributors.map((contributor, index) => (
+                <div 
+                  key={contributor.id}
+                  id={`contributor-${contributor.id}`}
+                  className="relative mb-4 group"
+                  onClick={() => toggleEditMode(contributor.id)}
                 >
-                  <Send size={14} />
+                  <ContributorCard
+                    contributor={contributor}
+                    totalAmount={totalAmount}
+                    onRemove={removeContributor}
+                    onEdit={updateContributorAmount}
+                    onNameChange={updateContributorName}
+                    index={index}
+                  />
+                  
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      sendContributorLink(contributor.id);
+                    }}
+                    className="opacity-0 group-hover:opacity-100 absolute right-3 top-3 p-2 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all transform scale-90 hover:scale-100"
+                    aria-label="Send payment link"
+                  >
+                    <Send size={14} />
+                  </button>
+                </div>
+              ))}
+            </StaggerChildren>
+            
+            {remainingAmount === 0 && (
+              <div className="flex justify-end mb-6">
+                <button
+                  onClick={saveContributors}
+                  className="btn-primary"
+                >
+                  Save Contributors
                 </button>
               </div>
-            ))}
-          </StaggerChildren>
+            )}
+          </>
         )}
         
         {contributors.length > 0 && (
