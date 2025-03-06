@@ -11,15 +11,16 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-// Use a basename that matches the base path in vite.config.ts
+// Don't use a basename since we're handling routes at the server level
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter basename="/app">
+      <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
+          <Route path="/app" element={<Index />} />
+          <Route path="/app/*" element={<Index />} />
           <Route path="/collect/:poolId" element={<Collector />} />
           <Route path="/pay/:poolId" element={<Contributor />} />
           <Route path="*" element={<NotFound />} />
