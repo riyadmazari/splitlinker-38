@@ -5,7 +5,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 203 83% 80%; /* #a1cef7 */
     --foreground: 240 10% 3.9%;
     
     --card: 0 0% 100%;
@@ -14,36 +14,37 @@
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
     
-    /* Primary purple color from website */
-    --primary: 260 71% 75%;
+    /* Primary orange color #F45404 */
+    --primary: 24 95% 49%;
     --primary-foreground: 0 0% 98%;
     
-    --secondary: 260 14% 96%;
-    --secondary-foreground: 260 30% 20%;
+    /* Light version of #F45404 */
+    --secondary: 24 95% 88%;
+    --secondary-foreground: 24 95% 30%;
     
-    --muted: 260 14% 96%;
+    --muted: 24 20% 96%;
     --muted-foreground: 240 3.8% 46.1%;
     
-    --accent: 260 14% 96%;
-    --accent-foreground: 240 5.9% 10%;
+    --accent: 24 20% 96%;
+    --accent-foreground: 24 60% 30%;
     
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 260 14% 90%;
-    --input: 260 14% 90%;
-    --ring: 260 71% 65%;
+    --border: 24 15% 90%;
+    --input: 24 15% 90%;
+    --ring: 24 95% 49%;
     
     --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 260 15% 26%;
-    --sidebar-primary: 260 71% 65%;
+    --sidebar-background: 203 83% 95%;
+    --sidebar-foreground: 24 95% 30%;
+    --sidebar-primary: 24 95% 49%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 260 14% 96%;
-    --sidebar-accent-foreground: 260 30% 20%;
-    --sidebar-border: 260 13% 91%;
-    --sidebar-ring: 260 91% 60%;
+    --sidebar-accent: 24 20% 96%;
+    --sidebar-accent-foreground: 24 60% 30%;
+    --sidebar-border: 24 15% 91%;
+    --sidebar-ring: 24 95% 49%;
   }
   
   .dark {
@@ -56,8 +57,8 @@
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
     
-    /* Lighter purple for dark mode */
-    --primary: 260 71% 75%;
+    /* Orange for dark mode */
+    --primary: 24 95% 49%;
     --primary-foreground: 240 5.9% 10%;
     
     --secondary: 240 3.7% 15.9%;
@@ -74,16 +75,16 @@
     
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
-    --ring: 260 71% 65%;
+    --ring: 24 95% 49%;
     
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 260 71% 65%;
+    --sidebar-primary: 24 95% 49%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 3.7% 15.9%;
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 260 71% 65%;
+    --sidebar-ring: 24 95% 49%;
   }
 }
 
@@ -151,7 +152,7 @@
   .shimmer::after {
     content: "";
     @apply absolute top-0 left-0 w-full h-full;
-    background: linear-gradient(90deg, transparent, rgba(155, 135, 245, 0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(244, 84, 4, 0.2), transparent);
     @apply animate-shimmer;
   }
 }
