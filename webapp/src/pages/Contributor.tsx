@@ -69,7 +69,6 @@ const Contributor = () => {
         poolId={poolId || "demo"} 
         amount={amount}
         availableContributors={availableContributors}
-        subscriptionName={subscriptionName}
       />
     </PageTransition>
   );
