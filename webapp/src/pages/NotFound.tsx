@@ -25,7 +25,7 @@ const NotFound = () => {
         </p>
         <Link 
           to="/" 
-          className="btn-primary inline-flex items-center"
+          className="btn-primary inline-flex items-center px-4 py-2 rounded bg-primary text-primary-foreground hover:bg-primary/90"
         >
           <Home size={18} className="mr-2" />
           Return Home

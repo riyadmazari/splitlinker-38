@@ -4,26 +4,26 @@ const path = require('path');
 
 const app = express();
 
-// Serve static files (Main HTML website)
+// Serve static files from the website directory
 app.use(express.static(path.join(__dirname, 'webpage')));
 
-// Serve React app when "/app" is visited
-app.use('/app', express.static(path.join(__dirname, 'webapp', 'dist')));
+// Serve the React app's static files from the dist directory
+app.use('/app', express.static(path.join(__dirname, 'webapp/dist')));
 
-// Catch-all route handler for React app
-// This is important for Single Page Applications with client-side routing
+// For any routes that start with /app, serve the React app's index.html
+// This is critical for client-side routing in the React app
 app.get('/app/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'webapp', 'dist', 'index.html'));
+  res.sendFile(path.join(__dirname, 'webapp/dist/index.html'));
 });
 
-// Default route handler for the main website
-app.get('*', (req, res, next) => {
-  // Skip this middleware if the request starts with /app
+// For all other routes, serve the website's index.html
+app.get('*', (req, res) => {
+  // Skip if the request is for /app
   if (req.path.startsWith('/app')) {
-    return next();
+    return; // Let the above handler take care of /app routes
   }
   
-  res.sendFile(path.join(__dirname, 'webpage', 'index.html'));
+  res.sendFile(path.join(__dirname, 'webpage/index.html'));
 });
 
 // Start server
