@@ -7,14 +7,6 @@ import { SlideTransition } from "@/components/ui/SlideTransition";
 import { FadeIn, ScaleIn } from "@/components/ui/animations";
 import { useToast } from "@/hooks/use-toast";
 
-// Mock subscription data - would come from API in a real app
-const MOCK_SUBSCRIPTIONS = [
-  { id: "netflix", name: "Netflix", amount: 19.99 },
-  { id: "spotify", name: "Spotify", amount: 9.99 },
-  { id: "amazon", name: "Amazon Prime", amount: 14.99 },
-  { id: "disney", name: "Disney+", amount: 8.99 },
-];
-
 const Index = () => {
   const [amount, setAmount] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -36,17 +28,13 @@ const Index = () => {
     
     setIsSubmitting(true);
     
-    // Generate a unique pool ID
+    // Generate a unique pool ID - in a real app, this would come from the API
     const poolId = generateUniqueId();
     
-    // Navigate to collector page with the amount
+    // Navigate to collector page directly with the amount
     setTimeout(() => {
       navigate(`/collect/${poolId}?amount=${parsedAmount}`);
     }, 500);
-  };
-
-  const selectSubscription = (id: string) => {
-    navigate(`/collect/${id}`);
   };
 
   return (
@@ -109,36 +97,10 @@ const Index = () => {
                       Creating...
                     </span>
                   ) : (
-                    "Create Custom Payment Pool"
+                    "Create Payment Pool"
                   )}
                 </button>
               </form>
-            </div>
-          </ScaleIn>
-          
-          <ScaleIn delay={0.2}>
-            <div className="glass-card p-6 mb-6">
-              <h2 className="text-xl font-semibold mb-4">Popular Subscriptions</h2>
-              <p className="text-sm text-muted-foreground mb-4">
-                Select a subscription service to split its cost
-              </p>
-              
-              <div className="grid grid-cols-2 gap-3">
-                {MOCK_SUBSCRIPTIONS.map((subscription) => (
-                  <button
-                    key={subscription.id}
-                    onClick={() => selectSubscription(subscription.id)}
-                    className="p-4 border border-input rounded-lg hover:bg-secondary/50 transition-colors text-left"
-                  >
-                    <div className="font-medium mb-1">{subscription.name}</div>
-                    <div className="flex items-center text-sm text-muted-foreground">
-                      <span>{subscription.amount.toFixed(2)}</span>
-                      <Euro size={12} className="ml-1" />
-                      <span className="ml-1">/month</span>
-                    </div>
-                  </button>
-                ))}
-              </div>
             </div>
           </ScaleIn>
           

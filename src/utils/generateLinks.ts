@@ -2,11 +2,10 @@
 import { Contributor } from "@/components/ui/ContributorCard";
 
 export const generatePaymentLink = (
-  contributorId: string,
   poolId = "demo",
   baseUrl = window.location.origin
 ): string => {
-  return `${baseUrl}/pay/${poolId}/${contributorId}`;
+  return `${baseUrl}/pay/${poolId}`;
 };
 
 export const generateCollectorLink = (

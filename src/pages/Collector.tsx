@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { CollectorForm } from "@/components/CollectorForm";
@@ -25,10 +26,10 @@ const Collector = () => {
   const [subscriptionName, setSubscriptionName] = useState<string>("Payment");
 
   useEffect(() => {
-    // In a real app, we would fetch the subscription details from API
-    // based on the poolId
+    // In a real application, we would fetch the pool details from the API
+    // based on the poolId provided by the business integration
     
-    // Check if this is a subscription ID from our mock data
+    // For testing, we're checking if this is one of our mock subscriptions
     const subscription = MOCK_SUBSCRIPTIONS[poolId];
     
     if (subscription) {
@@ -37,12 +38,13 @@ const Collector = () => {
       return;
     }
 
-    // Otherwise, use the amount from the query parameter
+    // If not a subscription, use the amount from the URL parameter
+    // In a real app, this would come from the API
     const amountParam = searchParams.get("amount");
     const amount = amountParam ? parseFloat(amountParam) : 0;
     
     if (!amountParam || isNaN(amount) || amount <= 0) {
-      // If no amount or invalid amount, redirect to index page
+      // If no amount or invalid amount, redirect to home page
       navigate("/");
       return;
     }

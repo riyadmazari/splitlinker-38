@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { User, Plus, Users, DollarSign, Send, Link, Euro, Copy } from "lucide-react";
@@ -81,19 +80,10 @@ export const CollectorForm = ({
     setContributors(distributeAmountEvenly(contributors, totalAmount));
   };
   
-  const sendContributorLink = (id: string) => {
-    const link = generatePaymentLink(id, poolId);
-    
-    const contributor = contributors.find(c => c.id === id);
-    if (!contributor) return;
-    
-    // In a real app, we would store contributors in a database
-    // and create payment links for each contributor
-    
-    // For demo, just show success toast with copy option
+  const sendContributorLink = () => {
     toast({
-      title: `Link sent to ${contributor.name}`,
-      description: "Payment link has been shared successfully",
+      title: "Link shared",
+      description: "Payment link has been shared with contributors",
     });
   };
 
@@ -103,9 +93,7 @@ export const CollectorForm = ({
     );
   };
 
-  // In a real app, this function would save the contributors to a database
   const saveContributors = () => {
-    // For this demo, we'll just show a toast
     if (contributors.length === 0) {
       toast({
         title: "No contributors",
@@ -131,14 +119,8 @@ export const CollectorForm = ({
     });
   };
 
-  // Generate a test contributor link for demonstration
-  const getContributorLinks = () => {
-    const links = contributors.map(contributor => ({
-      name: contributor.name,
-      link: `${window.location.origin}/pay/${poolId}/${contributor.id}`
-    }));
-    
-    return links;
+  const getContributorLink = () => {
+    return generatePaymentLink(poolId);
   };
   
   return (
@@ -264,17 +246,6 @@ export const CollectorForm = ({
                     onNameChange={updateContributorName}
                     index={index}
                   />
-                  
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      sendContributorLink(contributor.id);
-                    }}
-                    className="opacity-0 group-hover:opacity-100 absolute right-3 top-3 p-2 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all transform scale-90 hover:scale-100"
-                    aria-label="Send payment link"
-                  >
-                    <Send size={14} />
-                  </button>
                 </div>
               ))}
             </StaggerChildren>
@@ -304,34 +275,30 @@ export const CollectorForm = ({
             
             <FadeIn>
               <div className="glass-card p-5 mb-6">
-                <h3 className="font-medium mb-3">Contributor Payment Links</h3>
+                <h3 className="font-medium mb-3">Contributor Payment Link</h3>
                 <p className="text-sm text-muted-foreground mb-4">
-                  Share these links with each contributor to collect their payment
+                  Share this link with all contributors to collect their payments
                 </p>
                 
-                <div className="space-y-3">
-                  {getContributorLinks().map((item, index) => (
-                    <div key={index} className="flex items-center justify-between p-3 bg-secondary/30 rounded-lg">
-                      <div className="font-medium">{item.name}</div>
-                      <div className="flex items-center gap-2">
-                        <div className="text-xs truncate max-w-[150px] text-muted-foreground">
-                          {item.link.substring(0, 20)}...
-                        </div>
-                        <button
-                          onClick={() => {
-                            navigator.clipboard.writeText(item.link);
-                            toast({
-                              title: "Link copied",
-                              description: `Link for ${item.name} copied to clipboard`
-                            });
-                          }}
-                          className="p-1.5 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
-                        >
-                          <Copy size={14} />
-                        </button>
-                      </div>
+                <div className="flex items-center justify-between p-3 bg-secondary/30 rounded-lg">
+                  <div className="font-medium">{subscriptionName} Payment Link</div>
+                  <div className="flex items-center gap-2">
+                    <div className="text-xs truncate max-w-[150px] text-muted-foreground">
+                      {getContributorLink().substring(0, 20)}...
                     </div>
-                  ))}
+                    <button
+                      onClick={() => {
+                        navigator.clipboard.writeText(getContributorLink());
+                        toast({
+                          title: "Link copied",
+                          description: "Payment link copied to clipboard"
+                        });
+                      }}
+                      className="p-1.5 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
+                    >
+                      <Copy size={14} />
+                    </button>
+                  </div>
                 </div>
               </div>
             </FadeIn>

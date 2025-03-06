@@ -20,7 +20,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/collect/:poolId" element={<Collector />} />
-          <Route path="/pay/:poolId/:contributorId" element={<Contributor />} />
+          <Route path="/pay/:poolId" element={<Contributor />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
