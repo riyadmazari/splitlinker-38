@@ -63,6 +63,13 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        onepool: {
+          purple: "#9b87f5",
+          "dark-purple": "#7E69AB",
+          "deeper-purple": "#6E59A5",
+          "charcoal": "#1A1F2C",
+          "light-purple": "#D6BCFA",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -129,11 +136,12 @@ export default {
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "glass": "linear-gradient(119deg, rgba(255, 255, 255, 0.3) -1.28%, rgba(255, 255, 255, 0.05) 103.08%)",
+        "glass": "linear-gradient(119deg, rgba(155, 135, 245, 0.1) -1.28%, rgba(155, 135, 245, 0.05) 103.08%)",
+        "purple-gradient": "linear-gradient(90deg, hsla(260, 71%, 75%, 1) 0%, hsla(270, 50%, 51%, 1) 100%)",
       },
       boxShadow: {
-        glass: "0px 4px 24px -1px rgba(0, 0, 0, 0.05)",
-        "glass-hover": "0px 8px 32px -1px rgba(0, 0, 0, 0.1)",
+        glass: "0px 4px 24px -1px rgba(155, 135, 245, 0.15)",
+        "glass-hover": "0px 8px 32px -1px rgba(155, 135, 245, 0.25)",
         "neomorphic": "10px 10px 20px rgba(0, 0, 0, 0.05), -10px -10px 20px rgba(255, 255, 255, 0.8)",
       },
       backdropFilter: {
