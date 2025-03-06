@@ -8,10 +8,14 @@ const app = express();
 app.use(express.static(path.join(__dirname, 'webpage')));
 
 // Serve the React app's static files from the dist directory
+// Using /app as the route prefix for all webapp static assets
 app.use('/app', express.static(path.join(__dirname, 'webapp/dist')));
 
+// Also serve the webapp's assets at the root level of /pay and /collect paths
+app.use('/pay', express.static(path.join(__dirname, 'webapp/dist')));
+app.use('/collect', express.static(path.join(__dirname, 'webapp/dist')));
+
 // Routes that should be handled by the React app
-// This includes /app, /pay, and /collect paths
 app.get(['/app', '/app/*', '/pay/*', '/collect/*'], (req, res) => {
   res.sendFile(path.join(__dirname, 'webapp/dist/index.html'));
 });
@@ -19,7 +23,8 @@ app.get(['/app', '/app/*', '/pay/*', '/collect/*'], (req, res) => {
 // For all other routes, serve the website's index.html
 app.get('*', (req, res) => {
   // Skip if the request is already handled by the above routes
-  if (req.path.startsWith('/app/') || req.path === '/app' || req.path.startsWith('/pay/') || req.path.startsWith('/collect/')) {
+  if (req.path.startsWith('/app/') || req.path === '/app' || 
+      req.path.startsWith('/pay/') || req.path.startsWith('/collect/')) {
     return; // Already handled
   }
   

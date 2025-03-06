@@ -10,6 +10,6 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'), // Ensure "@/components" works
     },
   },
-  // Base path should be '/' since we're handling routing at the server level
-  base: '/',
+  // Using a relative base path ensures assets are loaded correctly
+  base: './',
 });
