@@ -11,8 +11,8 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'),
     },
   },
-  // For GitHub Pages with custom domain
-  base: '/app/',
+  // Use root base path since we're using a custom domain
+  base: '/',
   build: {
     // Generate source maps for better debugging
     sourcemap: true,
