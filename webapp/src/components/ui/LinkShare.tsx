@@ -39,7 +39,7 @@ export const LinkShare = ({
     if (navigator.share) {
       try {
         await navigator.share({
-          title: "OnPool Payment",
+          title: "OnePool Payment",
           text: "Here's your payment link",
           url: link,
         });

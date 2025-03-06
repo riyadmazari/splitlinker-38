@@ -41,7 +41,7 @@ const Index = () => {
     <div className="min-h-screen flex flex-col">
       <header className="py-6 px-4 border-b border-border">
         <div className="container max-w-6xl">
-          <h1 className="text-2xl font-bold">OnPool</h1>
+        <img src="onepoolwebsite/webpage/images/OnePool.png" alt="OnePool Logo" className="logo-image primary-logo" />
         </div>
       </header>
       
@@ -114,7 +114,7 @@ const Index = () => {
       
       <footer className="py-6 px-4 border-t border-border">
         <div className="container max-w-6xl text-center text-sm text-muted-foreground">
-          OnPool &copy; {new Date().getFullYear()} — All rights reserved
+          OnePool &copy; {new Date().getFullYear()} — All rights reserved
         </div>
       </footer>
     </div>
