@@ -13,6 +13,12 @@ export default defineConfig({
   },
   // For GitHub Pages with custom domain
   base: '/',
+  server: {
+    // Ensure proper MIME types are used
+    headers: {
+      'Content-Type': 'application/javascript',
+    },
+  },
   build: {
     // Generate a 404.html file for SPA routing
     rollupOptions: {

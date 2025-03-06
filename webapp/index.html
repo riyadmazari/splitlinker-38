@@ -26,6 +26,15 @@
     </script>
     <!-- Ensure paths are correct for GitHub Pages -->
     <base href="/" />
+    <!-- Fix for MIME type issues -->
+    <script type="module">
+      // This helps diagnose module loading issues
+      window.addEventListener('error', function(e) {
+        if (e.filename && (e.filename.includes('.js') || e.filename.includes('.ts'))) {
+          console.error('Script loading error:', e.message, 'in', e.filename);
+        }
+      });
+    </script>
   </head>
 
   <body>
