@@ -12,7 +12,7 @@ export default defineConfig({
     },
   },
   // For GitHub Pages with custom domain
-  base: '/',
+  base: '/app/',
   build: {
     // Generate source maps for better debugging
     sourcemap: true,
