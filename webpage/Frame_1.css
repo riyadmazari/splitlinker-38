@@ -1,150 +1,119 @@
-
-/* Adding additional styles to the existing CSS file */
-
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding: 0;
-  line-height: 1.6;
-  color: #333;
+.Frame_1 {
+	transform-box: fill-box;
+	transform-origin: 50% 50%
 }
-
-.container {
-  width: 85%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 15px;
+.Discover_Card {
+	animation: 2s linear 0.96s 1 normal forwards running Discover_Card;
+	transform-box: fill-box;
+	transform-origin: 50% 50%
 }
-
-header {
-  background-color: #fff;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  padding: 1rem 0;
+@keyframes Discover_Card {
+	0% {
+		transform: translateX(0px);
+	}
+	48% {
+		opacity: 1;
+	}
+	50% {
+		transform: translateY(0px) translateX(112px);
+	}
+	53% {
+		opacity: 0;
+	}
+	55% {
+		transform: translateY(11px);
+	}
 }
-
-header .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.Mastercard_Logo {
+	animation: 2s linear 1s 1 normal forwards running Mastercard_Logo;
+	transform-box: fill-box;
+	transform-origin: 50% 50%
 }
-
-.logo-image {
-  height: 40px;
+@keyframes Mastercard_Logo {
+	0% {
+		transform: translateX(0px);
+	}
+	50% {
+		transform: translateX(110px) translateY(0px);
+		opacity: 1;
+	}
+	54% {
+		opacity: 0;
+	}
+	55% {
+		transform: translateY(-8px);
+	}
 }
-
-nav ul {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.Apple_TV {
+	animation: 2s linear 0s 1 normal forwards running Apple_TV;
+	transform-box: fill-box;
+	transform-origin: 50% 50%
 }
-
-nav li {
-  margin-left: 2rem;
+@keyframes Apple_TV {
+	0% {
+		transform: translateX(0px);
+		opacity: 1;
+	}
+	50% {
+		transform: translateX(110px) translateY(0px);
+		opacity: 1;
+	}
+	58% {
+		opacity: 1;
+	}
+	66% {
+		transform: translateY(-61px);
+	}
+	64.5% {
+		opacity: 0;
+	}
 }
-
-nav a {
-  text-decoration: none;
-  color: #333;
-  font-weight: 500;
+.Visa {
+	animation: 2s linear 0s 1 normal forwards running Visa;
+	transform-box: fill-box;
+	transform-origin: 50% 50%
 }
-
-nav a.cta {
-  background-color: #6366f1;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
+@keyframes Visa {
+	0% {
+		transform: translateX(0px) translateY(0px);
+		opacity: 1;
+	}
+	50% {
+		transform: translateX(110px) translateY(0px);
+	}
+	66% {
+		transform: translateY(58px);
+	}
+	57.5% {
+		opacity: 1;
+	}
+	64.5% {
+		opacity: 0;
+	}
 }
-
-.hero {
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-  color: white;
-  padding: 4rem 0;
-  text-align: center;
+.Ellipse_6 {
+	animation: 2s linear 1.3s 1 normal forwards running Ellipse_6;
+	transform-box: fill-box;
+	transform-origin: 50% 50%
 }
-
-.hero h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+@keyframes Ellipse_6 {
+	65% {
+		transform: translateX(0px);
+	}
+	100% {
+		transform: translateX(130.5px);
+	}
 }
-
-.hero p {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
+.Shopping_Cart {
+	animation: 2s linear 0s 1 normal forwards running Shopping_Cart;
+	transform-box: fill-box;
+	transform-origin: 50% 50%
 }
-
-.cta-button {
-  display: inline-block;
-  background-color: white;
-  color: #6366f1;
-  padding: 0.8rem 2rem;
-  border-radius: 4px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: all 0.3s ease;
-}
-
-.cta-button:hover {
-  background-color: #f0f0f0;
-  transform: translateY(-2px);
-}
-
-.features, .about {
-  padding: 4rem 0;
-}
-
-.features h2, .about h2 {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.feature-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-}
-
-.feature-card {
-  background-color: #f9fafb;
-  border-radius: 8px;
-  padding: 2rem;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-}
-
-.feature-card h3 {
-  margin-top: 0;
-}
-
-footer {
-  background-color: #f9fafb;
-  padding: 2rem 0;
-  text-align: center;
-}
-
-.footer-links {
-  margin-top: 1rem;
-}
-
-.footer-links a {
-  margin: 0 0.5rem;
-  color: #6366f1;
-  text-decoration: none;
-}
-
-@media (max-width: 768px) {
-  nav ul {
-    flex-direction: column;
-  }
-  
-  nav li {
-    margin: 0.5rem 0;
-  }
-  
-  header .container {
-    flex-direction: column;
-  }
-  
-  .hero h1 {
-    font-size: 2rem;
-  }
+@keyframes Shopping_Cart {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(-360deg);
+	}
 }
