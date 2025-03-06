@@ -69,7 +69,7 @@ export default {
           "deeper-orange": "#AF3E03",
           "charcoal": "#1A1F2C",
           "light-orange": "#FFB08A",
-          "blue-bg": "#a1cef7",
+          "blue-bg": "#D7DBE4",
         },
       },
       borderRadius: {
