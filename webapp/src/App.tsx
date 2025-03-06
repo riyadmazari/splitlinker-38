@@ -11,7 +11,6 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-// Don't use a basename since we're handling routes at the server level
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
