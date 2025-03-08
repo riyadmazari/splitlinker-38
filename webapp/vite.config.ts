@@ -9,7 +9,7 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'),
     },
   },
-  // 👇 Set the correct base path for GitHub Pages
+  // 🔥 Fix the base path for GitHub Pages
   base: '/splitlinker-38/app/',  
   build: {
     sourcemap: true,
